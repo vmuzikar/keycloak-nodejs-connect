@@ -46,7 +46,7 @@ function ConsolePage () {}
 
 ConsolePage.prototype.get = function (port, resource) {
   resource = resource || '';
-  driver.get(`http://localhost:${port}${resource}`);
+  return driver.get(`http://localhost:${port}${resource}`);
 };
 
 ConsolePage.prototype.quit = function () {

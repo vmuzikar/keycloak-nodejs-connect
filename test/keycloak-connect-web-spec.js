@@ -79,7 +79,7 @@ test('User should be forbidden to access restricted page', t => {
   return page.body().getText().then(text => {
     t.equal(text, 'Access denied', 'Message should be access denied');
   }).then(() => {
-    page.get(app.port, '/logout');
+    return page.get(app.port, '/logout');
   });
 });
 
