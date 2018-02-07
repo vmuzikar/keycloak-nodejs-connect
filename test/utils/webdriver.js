@@ -47,12 +47,6 @@ function ConsolePage () {}
 ConsolePage.prototype.get = function (port, resource) {
   resource = resource || '';
   driver.get(`http://localhost:${port}${resource}`);
-  return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log("wait finished...");
-            resolve();
-        }, 3000)
-    });
 };
 
 ConsolePage.prototype.quit = function () {
@@ -93,6 +87,21 @@ ConsolePage.prototype.login = function (user, pass) {
   password.sendKeys(pass);
 
   driver.findElement(By.name('login')).click();
+};
+
+/**
+ * Logouts directly with support for a wait period
+ *
+ * @param port
+ * @returns {Promise<any>}
+ */
+ConsolePage.prototype.logout = function (port) {
+  this.get(port, '/logout');
+  return new Promise((resolve, reject) => {
+      setTimeout(() => {
+          resolve();
+      }, 2000);
+  });
 };
 
 ConsolePage.prototype.body = () => {

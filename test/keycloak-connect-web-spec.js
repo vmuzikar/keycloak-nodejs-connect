@@ -71,14 +71,14 @@ test('Should login with admin credentials', t => {
 });
 
 test('User should be forbidden to access restricted page', t => {
-//  t.plan(2);
+  // t.plan is not necessary with blue-tape; if there's t.plan, the test then doesn't wait for the logout
 
   page.get(app.port, '/restricted');
   page.login('alice', 'password');
 
   return page.body().getText().then(text => {
     t.equal(text, 'Access denied', 'Message should be access denied');
-    return page.get(app.port, '/logout');
+    return page.logout(app.port); // we need to wait a bit until the logout is fully completed
   });
 });
 
