@@ -46,7 +46,13 @@ function ConsolePage () {}
 
 ConsolePage.prototype.get = function (port, resource) {
   resource = resource || '';
-  return driver.get(`http://localhost:${port}${resource}`);
+  driver.get(`http://localhost:${port}${resource}`);
+  return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log("wait finished...");
+            resolve();
+        }, 3000)
+    });
 };
 
 ConsolePage.prototype.quit = function () {

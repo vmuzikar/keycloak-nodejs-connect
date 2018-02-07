@@ -71,14 +71,13 @@ test('Should login with admin credentials', t => {
 });
 
 test('User should be forbidden to access restricted page', t => {
-  t.plan(1);
+//  t.plan(2);
 
   page.get(app.port, '/restricted');
   page.login('alice', 'password');
 
   return page.body().getText().then(text => {
     t.equal(text, 'Access denied', 'Message should be access denied');
-  }).then(() => {
     return page.get(app.port, '/logout');
   });
 });
